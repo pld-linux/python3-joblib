@@ -29,7 +29,7 @@ BuildRequires:	python3-pandas
 BuildRequires:	python3-sphinx_gallery
 BuildRequires:	sphinx-pdg-3
 %endif
-Requires:	python-modules >= 1:3.6
+Requires:	python3-modules >= 1:3.6
 Conflicts:	python3-numpy < 1:1.6.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
