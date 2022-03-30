@@ -8,7 +8,7 @@ Summary:	Lightweight pipelining: using Python functions as pipeline jobs
 Summary(pl.UTF-8):	Lekkie przetwarzanie potokowe przy użyciu funkcji pythonowych jako zadań
 Name:		python3-joblib
 Version:	0.15.1
-Release:	3
+Release:	4
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/joblib/
