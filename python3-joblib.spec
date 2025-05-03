@@ -7,16 +7,17 @@
 Summary:	Lightweight pipelining: using Python functions as pipeline jobs
 Summary(pl.UTF-8):	Lekkie przetwarzanie potokowe przy użyciu funkcji pythonowych jako zadań
 Name:		python3-joblib
-Version:	1.2.0
-Release:	3
+Version:	1.5.0
+Release:	1
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/joblib/
 Source0:	https://files.pythonhosted.org/packages/source/j/joblib/joblib-%{version}.tar.gz
-# Source0-md5:	928a19e66a10f6cda32fb004440c70fb
+# Source0-md5:	9a0f8115ef727e5c4b960ce8b74eab19
 URL:		https://pypi.org/project/joblib/
+BuildRequires:	python3-build
+BuildRequires:	python3-installer
 BuildRequires:	python3-modules >= 1:3.6
-BuildRequires:	python3-setuptools
 %if %{with tests}
 BuildRequires:	python3-lz4
 BuildRequires:	python3-numpy >= 1.14
@@ -72,7 +73,7 @@ Dokumentacja API modułu Pythona joblib.
 %setup -q -n joblib-%{version}
 
 %build
-%py3_build
+%py3_build_pyproject
 
 %if %{with tests}
 # disable single failing test
@@ -89,7 +90,7 @@ PYTHONPATH=$(pwd) \
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%py3_install
+%py3_install_pyproject
 
 %{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/joblib/test
 
@@ -100,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE.txt README.rst
 %{py3_sitescriptdir}/joblib
-%{py3_sitescriptdir}/joblib-%{version}-py*.egg-info
+%{py3_sitescriptdir}/joblib-%{version}.dist-info
 
 %if %{with doc}
 %files apidocs
