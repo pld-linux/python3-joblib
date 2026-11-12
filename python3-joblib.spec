@@ -1,4 +1,4 @@
-# TODO: system modules: cloudpickle, loky
+# TODO: system module: loky
 #
 # Conditional build:
 %bcond_with	doc	# Sphinx documentation (fails on missing examples???)
@@ -7,21 +7,24 @@
 Summary:	Lightweight pipelining: using Python functions as pipeline jobs
 Summary(pl.UTF-8):	Lekkie przetwarzanie potokowe przy użyciu funkcji pythonowych jako zadań
 Name:		python3-joblib
-Version:	1.5.0
+Version:	1.6.0
 Release:	1
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/joblib/
 Source0:	https://files.pythonhosted.org/packages/source/j/joblib/joblib-%{version}.tar.gz
-# Source0-md5:	9a0f8115ef727e5c4b960ce8b74eab19
+# Source0-md5:	9c4ac71a0de48c7eaedafb0436ef6677
 URL:		https://pypi.org/project/joblib/
 BuildRequires:	python3-build
 BuildRequires:	python3-installer
-BuildRequires:	python3-modules >= 1:3.6
+BuildRequires:	python3-modules >= 1:3.10
+BuildRequires:	python3-setuptools >= 1:77.0.3
 %if %{with tests}
+BuildRequires:	python3-cloudpickle >= 3.0
 BuildRequires:	python3-lz4
 BuildRequires:	python3-numpy >= 1.14
 BuildRequires:	python3-pytest
+BuildRequires:	python3-pytest-asyncio
 BuildRequires:	python3-threadpoolctl
 %endif
 BuildRequires:	rpm-pythonprov
@@ -32,7 +35,7 @@ BuildRequires:	python3-numpydoc
 BuildRequires:	python3-sphinx_gallery
 BuildRequires:	sphinx-pdg-3
 %endif
-Requires:	python3-modules >= 1:3.6
+Requires:	python3-modules >= 1:3.10
 Conflicts:	python3-numpy < 1:1.6.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -78,6 +81,7 @@ Dokumentacja API modułu Pythona joblib.
 %if %{with tests}
 # disable single failing test
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+PYTEST_PLUGINS=pytest_asyncio.plugin \
 %{__python3} -m pytest joblib -k 'not test_parallel_call_cached_function_defined_in_jupyter'
 %endif
 
